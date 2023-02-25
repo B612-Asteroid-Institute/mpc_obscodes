@@ -1,0 +1,19 @@
+[build-system]
+requires =  ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mpc_obscodes"
+version = "2022.02.24"
+authors = [
+    {name = "B612 Asteroid Institute", email = "info@b612foundation.org"},
+]
+description = "Minor Planet Center Observatory Codes"
+readme = "README.md"
+requires-python = ">=3.7"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.package-data]
+mpc_obscodes = ["mpc_obscodes/obscodes_extended.json"]
