@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mpc_obscodes"
-version = "2022.02.24"
+version = "" # This version will be set by GH Actions
 authors = [
     {name = "B612 Asteroid Institute", email = "info@b612foundation.org"},
 ]

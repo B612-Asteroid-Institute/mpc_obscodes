@@ -1,0 +1,45 @@
+name: Build, Test, & Publish
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+    - name: Install OS Dependencies
+      run: apt-get install curl gzip 
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.11"
+    - name: Upgrade pip
+      run: python -m pip install --upgrade build
+    - name: Download Extended Observatory Code File 
+      run: |
+        curl https://minorplanetcenter.net/Extended_Files/obscodes_extended.json.gz -o mpc_obscodes/obscodes_extended.json.gz
+    - name: Decompress Extended Observatory Code File
+      run: |
+        gunzip -f mpc_obscodes/obscodes_extended.json.gz
+    - name: Set Version
+      run: |
+        VERSION=$(date -u +%Y.%m.%d)
+        sed -i "s/.*version =.*/version = \"$VERSION\"/g" pyproject.toml
+    - name: Install mpc_obscodes
+      run: pip install .[tests]
+    - name: Test mpc_obscodes
+      run: pytest .
+    - name: Build Source Distribution and Wheel
+      run: python -m build --sdist --wheel --outdir dist/ .
+    # - name: Publish mpc_obscodes to PyPI
+    #  uses: pypa/gh-action-pypi-publish@release/v1
+    #  with:
+    #    password: ${{ secrets.PYPI_API_TOKEN }} 
+    
+
+
+          
