@@ -12,6 +12,11 @@ description = "Minor Planet Center Observatory Codes"
 readme = "README.md"
 requires-python = ">=3.7"
 
+[project.optional-dependencies]
+tests = [
+    "pytest"
+]
+
 [tool.setuptools]
 include-package-data = true
 
