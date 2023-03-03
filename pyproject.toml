@@ -21,4 +21,4 @@ tests = [
 include-package-data = true
 
 [tool.setuptools.package-data]
-mpc_obscodes = ["mpc_obscodes/obscodes_extended.json"]
+mpc_obscodes = ["mpc_obscodes/obscodes_extended.json", "mpc_obscodes/obscodes_extended.md5"]

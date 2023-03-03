@@ -1,5 +1,3 @@
-import importlib.resources
+from importlib.resources import files
 
-mpc_obscodes = importlib.resources.files("mpc_obscodes").joinpath(
-    "obscodes_extended.json"
-)
+mpc_obscodes = files("mpc_obscodes").joinpath("obscodes_extended.json")
