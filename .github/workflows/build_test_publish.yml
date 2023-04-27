@@ -4,13 +4,12 @@ on:
   push:
     branches: [ "main" ]
   workflow_call:
-    workflows: ["Compare Upstream"]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      id-token: write 
+      id-token: write
 
     steps:
     - name: Checkout Repository
@@ -36,4 +35,4 @@ jobs:
     - name: Publish mpc_obscodes to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
-        password: ${{ secrets.PYPI_API_TOKEN }} 
+        password: ${{ secrets.PYPI_API_TOKEN }}
