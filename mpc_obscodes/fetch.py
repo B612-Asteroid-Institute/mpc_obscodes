@@ -9,8 +9,8 @@ import requests
 
 URL = "https://minorplanetcenter.net/Extended_Files/obscodes_extended.json.gz"
 FILE_COMPRESSED = os.path.join(os.path.dirname(__file__), "obscodes_extended.json.gz")
-FILE_DECOMPRESSED =  os.path.join(os.path.dirname(__file__), "obscodes_extended.json")
-MD5_FILE =  os.path.join(os.path.dirname(__file__), "obscodes_extended.md5")
+FILE_DECOMPRESSED = os.path.join(os.path.dirname(__file__), "obscodes_extended.json")
+MD5_FILE = os.path.join(os.path.dirname(__file__), "obscodes_extended.md5")
 
 
 def fetch_file(url: str, output_file: str):
