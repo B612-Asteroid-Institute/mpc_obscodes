@@ -1,14 +1,21 @@
 # Minor Planet Center Observatory Codes
 
+[![Python 3.7+](https://img.shields.io/badge/Python-3.7%2B-blue)](https://img.shields.io/badge/Python-3.7%2B-blue)
+[![PyPI version](https://img.shields.io/pypi/v/mpc-obscodes)](https://img.shields.io/pypi/v/mpc-obscodes)
+[![PyPi downloads](https://img.shields.io/pypi/dm/mpc-obscodes)](https://img.shields.io/pypi/dm/mpc-obscodes)  
+[![Build, Test, & Publish](https://github.com/B612-Asteroid-Institute/mpc_obscodes/actions/workflows/build_test_publish.yml/badge.svg)](https://github.com/B612-Asteroid-Institute/mpc_obscodes/actions/workflows/build_test_publish.yml)  
+
 This package ships the Minor Planet Center's [file](https://minorplanetcenter.net/Extended_Files/obscodes_extended.json.gz) of observatory codes and their geodetic coordinates.
 
-This is not an official MPC package. It is an automatically generated mirror of the file so that it is 
+This is not an official MPC package. It is an automatically generated mirror of the file so that it is
 installable via `pip`.
+
+Every night at 1 AM UTC, the MPC observatory code file is downloaded and compared (via md5 checksum) to the current version of this package. If the checksums are different, a new package will be published.
 
 ## Installation
 
 The latest version of the file can be install via pip:  
-`pip install mpc_obscodes`
+`pip install mpc-obscodes`
 
 ## Usage
 ```python
