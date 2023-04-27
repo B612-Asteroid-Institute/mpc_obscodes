@@ -38,13 +38,8 @@ def compare_md5(file1, file2):
     bool
         True if the MD5 hashes match, False otherwise.
     """
-    with open(file1, "rb") as f:
-        contents = f.read()
-        md5_hash1 = hashlib.md5(contents).hexdigest()
-
-    with open(file2, "rb") as f:
-        contents = f.read()
-        md5_hash2 = hashlib.md5(contents).hexdigest()
+    md5_hash1 = calculate_md5(file1)
+    md5_hash2 = calculate_md5(file2)
 
     return md5_hash1 == md5_hash2
 
