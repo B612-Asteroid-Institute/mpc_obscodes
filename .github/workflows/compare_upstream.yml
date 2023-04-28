@@ -2,7 +2,7 @@ name: Compare Upstream
 
 on:
   schedule:
-   - cron: "18 1 * * *"
+  - cron: "15 2 * * *" # 2:15am UTC every day
   workflow_dispatch:
 
 jobs:
@@ -39,6 +39,5 @@ jobs:
 
   build-test-publish:
     needs: compare
-    runs-on: ubuntu-latest
     if: needs.compare.outputs.upstream_change == 'true'
-    uses: ./.github/workflows/build_test_publish.yml
+    uses: B612-Asteroid-Institute/mpc_obscodes/.github/workflows/build_test_publish.yml@main
