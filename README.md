@@ -10,7 +10,7 @@ This package ships the Minor Planet Center's [file](https://minorplanetcenter.ne
 This is not an official MPC package. It is an automatically generated mirror of the file so that it is
 installable via `pip`.
 
-Every night at 1 AM UTC, the MPC observatory code file is downloaded and compared (via md5 checksum) to the current version of this package. If the checksums are different, a new package will be published.
+Every night at around 1 AM UTC, the MPC observatory code file is downloaded and compared (via md5 checksum) to the current version of this package. If the checksums are different, a new package will be published.
 
 ## Installation
 
