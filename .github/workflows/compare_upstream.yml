@@ -2,7 +2,8 @@ name: Compare Upstream
 
 on:
   schedule:
-   - cron: "0 1 * * *"
+   - cron: "18 1 * * *"
+  workflow_dispatch:
 
 jobs:
   compare:
