@@ -5,6 +5,10 @@ on:
   - cron: "15 2 * * *" # 2:15am UTC every day
   workflow_dispatch:
 
+concurrency:
+  group: mpc-obscodes-upstream-mirror
+  cancel-in-progress: false
+
 jobs:
   compare:
     runs-on: ubuntu-latest
@@ -41,3 +45,43 @@ jobs:
     needs: compare
     if: needs.compare.outputs.upstream_change == 'true'
     uses: B612-Asteroid-Institute/mpc_obscodes/.github/workflows/build_test_publish.yml@main
+
+  keep-schedule-active:
+    if: github.event_name == 'schedule' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: Record monthly mirror activity
+      run: |
+        heartbeat=.github/mpc-obscodes-mirror-heartbeat
+        current_month=$(date -u +%Y-%m)
+        if [ "$(cat "$heartbeat" 2>/dev/null || true)" = "$current_month" ]; then
+          exit 0
+        fi
+        printf '%s\n' "$current_month" > "$heartbeat"
+        git config user.name github-actions[bot]
+        git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+        git add "$heartbeat"
+        git commit -m "Keep obscodes mirror schedule active ($current_month)"
+        for attempt in 1 2 3; do
+          git fetch origin main
+          if ! git rebase origin/main; then
+            git rebase --abort
+            if [ "$(git show origin/main:$heartbeat 2>/dev/null || true)" = "$current_month" ]; then
+              exit 0
+            fi
+            exit 1
+          fi
+          if git push origin HEAD:main; then
+            exit 0
+          fi
+          if [ "$attempt" -lt 3 ]; then
+            sleep $((attempt * 2))
+          fi
+        done
+        exit 1
